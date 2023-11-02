@@ -1,0 +1,15 @@
+{
+    "host": "localhost:8080",
+    "tags": [
+        {
+            "name": "User",
+            "description": "Some User desc"
+        }
+    ],
+    "definitions": {
+        "User": {
+            "name": "string",
+            "password": "string"
+        }
+    }
+}
