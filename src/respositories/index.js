@@ -1,5 +1,6 @@
 const mysql2 = require('mysql2');
 const { promisify } = require('util');
+
 require('dotenv').config();
 const sqlUtils = require('./repository.utils');
 
@@ -55,7 +56,7 @@ const commitSqlQuery = async (queriesList, dbConnection) => {
         // Close the dbConnection when done
         await endAsync();
     }
-}
+};
 
 const getConnection = () => {
     const {
@@ -84,7 +85,7 @@ const getConnection = () => {
         });
     });
 
-}
+};
 
 const run = async (queriesList) => {
     try {
@@ -98,6 +99,6 @@ const run = async (queriesList) => {
         console.error('Sql runner failed with error:', err);
         return [{ error: err }];
     }
-}
+};
 
 module.exports = { run, utils: sqlUtils };

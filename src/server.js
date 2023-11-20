@@ -1,8 +1,8 @@
 require('dotenv').config(); // Load environment variables from .env file
 const { serverSwagger } = require('./serverUtils');
 const Routes = require('./controllers/index');
-
 const express = require('express');
+
 const app = express();
 
 const port = process.env.PORT; // Read port from environment variable
@@ -37,4 +37,4 @@ app.listen(port, () => {
     console.error(error);
 });
 
-module.exports = app;   
+module.exports = app;

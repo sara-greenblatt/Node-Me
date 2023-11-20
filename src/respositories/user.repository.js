@@ -7,7 +7,7 @@ class UserRepository {
             params: [userName]
         }]);
         return queryResults?.[0];
-    };
+    }
 
     async createNewUser(userDetails) {
         const queryResults = await SqlRunner.run([{
@@ -20,7 +20,7 @@ class UserRepository {
             queryResults[0].error = new Error('User creation failed');
         }
         return queryResults?.[0];
-    };
+    }
 }
 
 module.exports = new UserRepository();

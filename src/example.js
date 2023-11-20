@@ -13,7 +13,7 @@ app.use(
   expressSession({
     secret: 'sessionSecret', // Secret for session management
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 
@@ -23,8 +23,8 @@ app.use(cookieParser());
 const users = {
   user1: {
     username: 'user1',
-    password: 'password1',
-  },
+    password: 'password1'
+  }
 };
 
 // Middleware to protect routes
@@ -75,7 +75,7 @@ app.post('/login', (req, res) => {
       expressSession({
         secret: 'sessionSecret', // Secret for session management
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: true
       })
     );
     
@@ -85,8 +85,8 @@ app.post('/login', (req, res) => {
     const users = {
       user1: {
         username: 'user1',
-        password: 'password1',
-      },
+        password: 'password1'
+      }
     };
     
     // Middleware to protect routes

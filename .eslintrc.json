@@ -1,0 +1,42 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "promise/always-return": "error",
+        "padding-line-between-statements": [
+            "error",
+            {
+                "blankLine": "always",
+                "prev": "cjs-import",
+                "next": "*"
+            },
+            {
+                "blankLine": "never",
+                "prev": "cjs-import",
+                "next": "cjs-import"
+            }
+        ],
+        "comma-dangle": [
+            "error"
+        ],
+        "semi": [
+            "error"
+        ],
+        "spaced-comment": [
+            "error"
+        ],
+        "eol-last": [
+            "error"
+        ]
+    },
+    "plugins": [
+        "promise"
+    ]
+}
