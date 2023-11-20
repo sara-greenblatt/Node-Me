@@ -14,8 +14,8 @@ class UserController {
             res.status(400).send({ message: "Invalid request Schema" });
             return;
         }
-        const { userName, password } = req.body.user;
-        if (!userName || !password) {
+        const { name, password } = req.body.user;
+        if (!name || !password) {
             /* #swagger.responses[500] = { 
                 description: "Username and password are required" 
             } */
@@ -25,7 +25,7 @@ class UserController {
         try {
             const newUser = new User(req.body.user);
             const savedUserStatus = 0;
-            res.status(200).send(savedUserStatus);
+            res.status(200).send({ status: savedUserStatus });
             return;
         } catch (error) {
             console.error(error);

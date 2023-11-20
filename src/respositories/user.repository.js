@@ -10,7 +10,7 @@ class UserRepository {
                         console.error(err);
                         reject(err);
                     }
-                    resolve(results);
+                    resolve(results?.[0]);
                 })
         });
     }

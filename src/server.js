@@ -7,7 +7,11 @@ const app = express();
 
 const port = process.env.PORT; // Read port from environment variable
 
-new Routes(app); // Register routes-> User Router
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Register routes-> User Router
+new Routes(app);
 
 /**
  * @swagger
