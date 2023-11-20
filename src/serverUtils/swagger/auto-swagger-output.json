@@ -47,7 +47,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User registered successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -72,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User registered successfully.",
+            "description": "User fetched successfully.",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -93,6 +96,10 @@
           "example": "string"
         },
         "password": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
           "type": "string",
           "example": "string"
         }

@@ -14,18 +14,25 @@ class UserController {
             res.status(400).send({ message: "Invalid request Schema" });
             return;
         }
-        const { name, password } = req.body.user;
-        if (!name || !password) {
+        const { name, password, email } = req.body.user;
+        if (!name || !password || !email) {
             /* #swagger.responses[500] = { 
                 description: "Username and password are required" 
             } */
             res.status(500).send({ message: "Username and password are required" });
-            return;
         }
         try {
             const newUser = new User(req.body.user);
-            const savedUserStatus = 0;
-            res.status(200).send({ status: savedUserStatus });
+            const savedUser = await userRepository.createNewUser(newUser);
+            if (savedUser?.error) {
+                res.status(500).send({ message: savedUser?.error?.message });
+                return;
+            }
+            /* #swagger.responses[200] = { 
+           schema: { "$ref": "#/definitions/User" },
+           description: "User registered successfully." 
+         } */
+            res.status(200).send(newUser);
             return;
         } catch (error) {
             console.error(error);
@@ -50,15 +57,19 @@ class UserController {
         }
         try {
             const userDetails = await userRepository.fetchUserDetails(name);
-            if (!Object.keys(userDetails || {}).length) {
+            if (userDetails?.error) {
+                res.status(500).send({ message: `Internal server error: ${userDetails.error}` });
+                return;
+            }
+            if (!Object.keys(userDetails?.results || {}).length) {
                 res.status(500).send({ message: "User not found" });
                 return;
             }
             /* #swagger.responses[200] = { 
               schema: { "$ref": "#/definitions/User" },
-              description: "User registered successfully." 
+              description: "User fetched successfully." 
             } */
-            return res.status(200).send({ ...userDetails });
+            return res.status(200).send({ ...userDetails?.results?.[0] });
         } catch (error) {
             console.error(error);
         }

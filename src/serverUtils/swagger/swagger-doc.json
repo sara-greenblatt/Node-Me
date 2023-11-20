@@ -9,7 +9,8 @@
     "definitions": {
         "User": {
             "name": "string",
-            "password": "string"
+            "password": "string",
+            "email": "string"
         }
     }
 }

@@ -1,9 +1,9 @@
-// const { RowDataPacket } = require("mysql2");
-
 class User {
-    // constructor(data) {
-    //     super(data);
-    // }
+    constructor(user) {
+        this.email = user.email;
+        this.password = user.password;
+        this.name = user.password
+    }
 }
 
 module.exports = User;
