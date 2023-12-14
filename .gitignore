@@ -133,6 +133,3 @@ src/example.js
 #node-modules
 node-modules/
 **/node_modules
-
-#dev-temporray-file
-src/example.js
