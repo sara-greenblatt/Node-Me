@@ -2,6 +2,8 @@ require('dotenv').config(); // Load environment variables from .env file
 const { serverSwagger } = require('./serverUtils');
 const Routes = require('./controllers/index');
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
 
 const app = express();
 
@@ -13,28 +15,22 @@ app.use(express.json());
 // Register routes-> User Router
 new Routes(app);
 
-/**
- * @swagger
- * /api/:
- *   get:
- *     summary: Retrieve something
- *     responses:
- *       200:
- *         description: Successfully retrieved something
- */
-app.get('/', (req, res) => {
-    console.log('request received', req.url);
-    res.send('Hello World!'); // Temporary response
-});
-
 // swagger integration
 serverSwagger(app);
 
-// start the server on port
-app.listen(port, () => {
-    console.log('Server is listening on port', port);
-}).on('error', (error) => {
-    console.error(error);
-});
+const keyPath = process.env.SSL_KEY_PATH;
+const certPath = process.env.SSL_CERT_PATH;
+
+https
+    .createServer(
+        {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath)
+        },
+        app
+    )
+    .listen(port, () => {
+        console.log("HTTPS server is running at port", port);
+    });
 
 module.exports = app;

@@ -1,5 +1,8 @@
 {
     "host": "localhost:8080",
+    "schemes": [
+        "https"
+    ],
     "tags": [
         {
             "name": "User",
