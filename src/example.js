@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
+console.log('test-gtignore-dev');
+
 // Secret key for JWT
 const secretKey = 'mySecretKey';
 
@@ -64,12 +66,12 @@ app.post('/login', (req, res) => {
     const jwt = require('jsonwebtoken');
     const expressSession = require('express-session');
     const cookieParser = require('cookie-parser');
-    
+
     const app = express();
-    
+
     // Secret key for JWT
     const secretKey = 'mySecretKey';
-    
+
     // Initialize express-session
     app.use(
       expressSession({
@@ -78,9 +80,9 @@ app.post('/login', (req, res) => {
         saveUninitialized: true
       })
     );
-    
+
     app.use(cookieParser());
-    
+
     // Sample user data (you can replace this with your user data)
     const users = {
       user1: {
@@ -88,7 +90,7 @@ app.post('/login', (req, res) => {
         password: 'password1'
       }
     };
-    
+
     // Middleware to protect routes
     const requireAuth = (req, res, next) => {
       if (req.session.isAuthenticated) {
@@ -97,43 +99,43 @@ app.post('/login', (req, res) => {
         res.sendStatus(401); // Unauthorized
       }
     };
-    
+
     // Login route
     app.post('/login', (req, res) => {
       const { username, password } = req.body;
-    
+
       // Check if the user exists
       const user = users[username];
-    
+
       if (user && user.password === password) {
         // Create a JWT
         const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
-    
+
         // Store the token in the user's session
         req.session.isAuthenticated = true;
-    
+
         res.json({ token });
       } else {
         res.sendStatus(401); // Unauthorized
       }
     });
-    
+
     // Protected route
     app.get('/protected', requireAuth, (req, res) => {
       res.json({ message: 'This is a protected route' });
     });
-    
+
     // Logout route
     app.post('/logout', (req, res) => {
       req.session.destroy(() => {
         res.sendStatus(200);
       });
     });
-    
+
     app.listen(3000, () => {
       console.log('Server is running on port 3000');
     });
-    
+
   }
 });
 
