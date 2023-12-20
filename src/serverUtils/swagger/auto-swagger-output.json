@@ -16,10 +16,33 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "authorization token associated to session (Bearer <<Token>>)"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/": {
       "get": {
         "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "description": "Token associated to client session",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -31,6 +54,13 @@
       "post": {
         "description": "",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "description": "Token associated to client session",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -71,6 +101,13 @@
             "type": "string",
             "required": true,
             "description": "User name"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "description": "Token associated to client session",
+            "type": "string"
           }
         ],
         "responses": {
@@ -82,6 +119,40 @@
           },
           "500": {
             "description": "Use name is required."
+          }
+        }
+      }
+    },
+    "/session/anonymous/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User object for login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User registered successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Username and password are required"
           }
         }
       }

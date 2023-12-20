@@ -11,7 +11,7 @@ class UserRepository {
 
     async createNewUser(userDetails) {
         const queryResults = await SqlRunner.run([{
-            query: 'INSERT INTO users (userName, email, password) VALUES (?, ?, ?)',
+            query: 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
             params: [userDetails.name, userDetails.email, userDetails.password]
         }]);
         if (queryResults?.[0]?.error) {

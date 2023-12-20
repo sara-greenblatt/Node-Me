@@ -4,11 +4,20 @@ const userRepository = require('../../respositories/user.repository');
 class UserController {
     // create new user
     async createUser(req, res) {
+
+        /*  #swagger.parameters['header'] = {
+             in: 'header',
+             name: 'authorization',
+             required: true,
+             description: 'Token associated to client session'
+        } */
+
         /*  #swagger.parameters['body'] = {
              in: 'body',
              description: 'New user',
              schema: { user: { $ref: "#/definitions/User" } }
-      } */
+        } */
+
         if (!req.body?.user) {
             console.log('body', req.query, req.parameters);
             res.status(400).send({ message: "Invalid request Schema" });
@@ -40,13 +49,22 @@ class UserController {
     }
 
     async fetchUserDetails(req, res) {
+
         /*  #swagger.parameters['name'] = {
              in: 'query',
              type: 'string',
              required: true,
              description: 'User name'
             } 
-         */
+        */
+
+        /*  #swagger.parameters['header'] = {
+            in: 'header',
+            name: 'authorization',
+            required: true,
+            description: 'Token associated to client session'
+       } */
+
         const { name } = req.query || {};
         if (!name) {
             /* #swagger.responses[500] = { 

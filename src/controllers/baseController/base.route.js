@@ -7,18 +7,15 @@ class BaseRouter {
     }
 
     initRoutes() {
-        /**
-        * @swagger
-        * /api/:
-        *   get:
-        *     summary: Retrieve something
-        *     responses:
-        *       200:
-        *         description: Successful   ly retrieved something
-        */
         this.router.get('/', (req, res) => {
+            /*  #swagger.parameters['body'] = {
+                 in: 'header',
+                 name: 'authorization',
+                 required: true,
+                 description: 'Token associated to client session'
+            } */
             console.log('request received', req.url);
-            res.send('Hello World!'); // Temporary response
+            res.send('Welcome to Node Me !!'); // Temporary response
         });
     }
 }
